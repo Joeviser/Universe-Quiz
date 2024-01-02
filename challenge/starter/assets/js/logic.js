@@ -9,7 +9,7 @@
 
 //When the game ends, it should display their score and give the user the ability to save their initials and their score
 
-//Sets of questions..->arrays of objects
+//Sets of questions..->objects
 //each question needs the following:
     //Question text
     //Sets of answers
@@ -25,11 +25,11 @@
     //The first question appears(with its answers)
     
     //For each question:
-        //User clicks an answer..->buttons-->list of buttom?<ol>
+        //User clicks an answer..->buttons
         //Their choice is compared to the correct answer as stored in the question's object
         //If correct-->tell them
         //If not-->tell them and subtract time for the timer
-        //Either way, the question disappears after a few seconds and the next question appears
+        //Either way, the question disappears after a few seconds and the next question appears???
 
 //After the last question:
         //Timer stops
@@ -52,11 +52,7 @@
     const questionsDiv= document.getElementById("questions");
     const choicesUL= document.getElementById("choices");
     const startScreen=document.getElementById("start-screen");
-
-   // const resultResponse = document.querySelector("#response");
     const resultResponse = document.querySelector("#response");
-    const nextButton = document.getElementById("next");
-
     const endScreen= document.getElementById("end-screen");
     const finalScore= document.getElementById("final-score");
     const initialsInp= document.getElementById("initials");
@@ -64,6 +60,7 @@
     const timer= document.getElementById("time");
     const feedbackDiv= document.getElementById("feedback");
 
+    //Quiz Object 
     const questions=[
         {
             question:"What Planet is closest to the sun?",
@@ -84,11 +81,11 @@
 
 let currentQuestionPosition=0;
 let secondsLeft=60;
-let numElements=3;
+
 
 function setTime() {
-    //let secondsLeft=60;
-    // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+
+    //Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     const timerInterval = setInterval(function() {
       secondsLeft--;
       timer.textContent = secondsLeft;
@@ -101,11 +98,11 @@ function setTime() {
   
     }, 1000);
   }
+//start the quiz when click the button start
+startButton.addEventListener("click",startQuiz);
 
-    startButton.addEventListener("click",startQuiz);
 
-
-    function startQuiz(){
+function startQuiz(){
         startButton.classList.add("hide");
         startScreen.classList.add("hide");
         questionsDiv.classList.remove("hide");
@@ -118,8 +115,6 @@ function showQuestions(index){
     startButton.classList.add("hide");
     startScreen.classList.add("hide");
     questionsDiv.classList.remove("hide");
-  
-
    
     displayQuestions(index);
    
@@ -134,7 +129,6 @@ function showQuestions(index){
 
         for (let i=0; i< questions.length; i++){
             
-
             const listItemButton= document.createElement ("button");
             const choiceItem=currentQuestion.choices[i];
             listItemButton.textContent=choiceItem;
@@ -156,6 +150,7 @@ function showQuestions(index){
                  //show the result
                 resultResponse.textContent = result;
                 index++;
+                //show next question/answer 
                 showQuestions(index);
                 
                 
