@@ -55,6 +55,7 @@
 
    // const resultResponse = document.querySelector("#response");
     const resultResponse = document.querySelector("#response");
+    const nextButton = document.getElementById("next");
 
     const endScreen= document.getElementById("end-screen");
     const finalScore= document.getElementById("final-score");
@@ -73,15 +74,20 @@
             question:"There are_____Planets in The Solar System?",
             choices:["6", "10", "8"],
             correctAnswer:"8"
-        }
+        },
+        {
+            question:"What is the biggest Measurement (distance) used for measuring galaxies",
+            choices:["Kilometres", "Micrometers", "Yottameters"],
+            correctAnswer:"Yottameters"
+        },
     ];
 
 let currentQuestionPosition=0;
-
-
+let secondsLeft=60;
+let numElements=3;
 
 function setTime() {
-    let secondsLeft=60;
+    //let secondsLeft=60;
     // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     const timerInterval = setInterval(function() {
       secondsLeft--;
@@ -104,25 +110,30 @@ function setTime() {
         startScreen.classList.add("hide");
         questionsDiv.classList.remove("hide");
         setTime();
-        displayQuestions();
+        
+        displayQuestions(currentQuestionPosition);
+        
     }
+function showQuestions(index){
+    startButton.classList.add("hide");
+    startScreen.classList.add("hide");
+    questionsDiv.classList.remove("hide");
+  
 
- 
+   
+    displayQuestions(index);
+   
+}
 
-
-
-    function displayQuestions(){
+    function displayQuestions(index){
         var result;
-
-        const currentQuestion=questions[currentQuestionPosition];
+        const currentQuestion=questions[index];
         document.getElementById("question-title").textContent=currentQuestion.question;
 
 
 
-        for (let i=0; i< currentQuestion.choices.length; i++){
-            //first reset the list of answers
-            //choices=[];
-
+        for (let i=0; i< questions.length; i++){
+            
 
             const listItemButton= document.createElement ("button");
             const choiceItem=currentQuestion.choices[i];
@@ -138,20 +149,22 @@ function setTime() {
                      result= "Correct!";
                 }else {
                      result= "Wrong!";
-                 }
+                     //If the answer clicked was incorrect then subtract 10sec from the clock
+                     secondsLeft=secondsLeft-10;
 
+                 }
+                 //show the result
                 resultResponse.textContent = result;
-                currentQuestionPosition++;
-                //console.log(currentQuestionPosition);
+                index++;
+                showQuestions(index);
+                
+                
             });
          }
+        
 
      }
 
-  
-    
-  // Add listener to submit element
-  //submitEl.addEventListener("click", showResponse);
 
 
   
