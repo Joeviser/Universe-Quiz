@@ -43,11 +43,17 @@
     //High scores are listed, sorted highest to lowest
     //User has option to take the quiz again
 
+
+
+
+// Selects elements by id
+
     const startButton= document.getElementById("start");
     const questionsDiv= document.getElementById("questions");
     const choicesUL= document.getElementById("choices");
     const startScreen=document.getElementById("start-screen");
 
+   // const resultResponse = document.querySelector("#response");
     const resultResponse = document.querySelector("#response");
 
     const endScreen= document.getElementById("end-screen");
@@ -71,8 +77,10 @@
     ];
 
 let currentQuestionPosition=0;
-let timeLeft=75;
-let timerInterval;
+
+
+
+
 
     startButton.addEventListener("click",startQuiz);
 
@@ -81,6 +89,7 @@ let timerInterval;
         startButton.classList.add("hide");
         startScreen.classList.add("hide");
         questionsDiv.classList.remove("hide");
+        //setTime();
         displayQuestions();
     }
 
@@ -106,14 +115,29 @@ let timerInterval;
             listItemButton.textContent=choiceItem;
             choicesUL.appendChild(listItemButton);
 
-            
-        }
+            // Action to be performed on click-->show if the user chose the right/wrong answer
+            listItemButton.addEventListener("click",function(event){
+             // Prevent default action
+                event.preventDefault();
 
-        
-             
-    }
+                if (listItemButton.textContent=== currentQuestion.correctAnswer){
+                     result= "Correct!";
+                }else {
+                     result= "Wrong!";
+                 }
+
+                resultResponse.textContent = result;
+                currentQuestionPosition++;
+                //console.log(currentQuestionPosition);
+            });
+         }
+
+     }
 
   
     
   // Add listener to submit element
   //submitEl.addEventListener("click", showResponse);
+
+
+  
