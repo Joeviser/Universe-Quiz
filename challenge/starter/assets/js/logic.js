@@ -80,7 +80,21 @@ let currentQuestionPosition=0;
 
 
 
-
+function setTime() {
+    let secondsLeft=60;
+    // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    const timerInterval = setInterval(function() {
+      secondsLeft--;
+      timer.textContent = secondsLeft;
+      if(secondsLeft === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        // Calls function to create and append image
+        //sendMessage();
+      }
+  
+    }, 1000);
+  }
 
     startButton.addEventListener("click",startQuiz);
 
@@ -89,7 +103,7 @@ let currentQuestionPosition=0;
         startButton.classList.add("hide");
         startScreen.classList.add("hide");
         questionsDiv.classList.remove("hide");
-        //setTime();
+        setTime();
         displayQuestions();
     }
 
